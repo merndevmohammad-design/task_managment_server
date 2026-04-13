@@ -1,11 +1,24 @@
 const express = require("express");
-require('dotenv').config();
-const app = express();
-const connectDb = require('./utils/db');
+require("dotenv").config();
 
-app.get("/", (req, res) => {
-  res.status(200).send("starting the new task managment project ");
-});
+const app = express();
+const connectDb = require("./utils/db");
+const authRouter = require("./router/auth-router");
+
+const errorMiddleware = require("./middlewares/error-middleware");
+const notFound = require("./middlewares/not-found");
+
+
+app.use(express.json());
+
+
+app.use("/api/auth", authRouter);
+
+
+app.use(notFound);
+
+
+app.use(errorMiddleware);
 
 connectDb().then(() => {
   const PORT = 5000;
