@@ -21,4 +21,12 @@ lastName: Joi.string().trim().min(2).max(30).allow("", null),
     isAdmin: Joi.boolean().optional()
 });
 
-module.exports = { registerSchema };
+const loginSchema = Joi.object({
+  identifier: Joi.string().required().messages({
+    "any.required": "Email, username or phone is required",
+  }),
+
+  password: Joi.string().min(6).required(),
+});
+
+module.exports = { registerSchema,loginSchema };

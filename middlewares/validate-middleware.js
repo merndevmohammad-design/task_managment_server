@@ -7,7 +7,6 @@ const validate = (schema) => (req, res, next) => {
       const errorMessage = error.details.map((el) => el.message).join(", ");
       return sendErrorResponse(res, 400, errorMessage);
     }
-    // Moves to the next middleware (the controller)
     next(); 
   } catch (err) {
     next(err);
