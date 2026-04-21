@@ -3,7 +3,6 @@ const { sendSuccessResponse, sendErrorResponse } = require("../utils/sendJSONRes
 const jwt = require('jsonwebtoken');
 
 
-
 const register = async (req, res, next) => {
   try {
     const { firstName, lastName, username, email, phone, password, isAdmin} = req.body;
@@ -118,7 +117,6 @@ const logout = async (req, res, next) => {
       return sendErrorResponse(res, 401, "Invalid or expired token. Please login again.");
     }
 
-    // ✅ Logout success (client should remove token)
     return sendSuccessResponse(res, 200, {
       message: "Logged out successfully",
     });
